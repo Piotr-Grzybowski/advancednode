@@ -41,8 +41,12 @@ myDB(async client => {
 
   app.route("/").get((req, res) => {
     //Change the response to render the Pug template
-    res.render(process.cwd() + '/views/pug', { title: 'Connected to Database', message: 'Please login' });
+    res.render(process.cwd() + '/views/pug', { title: 'Connected to Database', message: 'Please login', showLogin: true });
   });
+
+  app.route('/login').post(passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+    
+  })
 
   passport.serializeUser((user, done) => {
     done(null, user._id);
