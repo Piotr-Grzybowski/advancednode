@@ -7,7 +7,13 @@ const session = require('express-session');
 const passport = require('passport');
 const ObjectID = require('mongodb').ObjectID;
 const LocalStrategy = require('passport-local');
-const ensureAuthenticated = require('./middlewares/ensureAuthenticated');
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+};
 
 const app = express();
 app.set('view engine', 'pug');
