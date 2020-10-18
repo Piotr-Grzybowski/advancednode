@@ -28,16 +28,15 @@ module.exports = (app, myDatabase) => {
 		})
   );
 
-  passport.use(
-    new GitHubStrategy({
+  passport.use(new GitHubStrategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: 'https://advancednode-3.piotrgrzybowski.repl.co/auth/github/callback'
+      callbackURL: "https://advancednode-3.piotrgrzybowski.repl.co/auth/github/callback"
     },
-    (accessToken, refreshToken, profile, cb) => {
+    function (accessToken, refreshToken, profile, cb) {
       console.log(profile);
       // Database logic here with callback containing our user object
     })
-  )
+  );
 
 }
