@@ -63,7 +63,6 @@ myDB(async (client) => {
 				},
 				(err, doc) => {
           if (err) res.redirect('/');
-          console.log('Document : -------------', doc);
 					next(null, doc.ops[0]);
 				}
 			);
