@@ -1,8 +1,10 @@
 module.exports = (app, myDatabase) => {
 
+  require('dotenv').config();
   const passport = require('passport');
   const ObjectID = require('mongodb').ObjectID;
   const LocalStrategy = require('passport-local');
+  const GitHubStrategy = require('passport-github').Strategy;
 
   passport.serializeUser((user, done) => {
 		done(null, user._id);
@@ -25,5 +27,17 @@ module.exports = (app, myDatabase) => {
 			});
 		})
   );
+
+  passport.use(
+    new GitHubStrategy({
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: 'https://advancednode-3.piotrgrzybowski.repl.co/auth/github/callback'
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(profile);
+      // Database logic here with callback containing our user object
+    })
+  )
 
 }
