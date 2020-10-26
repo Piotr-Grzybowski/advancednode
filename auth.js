@@ -35,7 +35,7 @@ module.exports = (app, myDatabase) => {
     },
     (accessToken, refreshToken, profile, cb) => {
       console.log(profile);
-      myDatabase.findOneAndUpdate({ id: profile.id }), {
+      myDatabase.findOneAndUpdate({ id: profile.id }, {
         $setOnInsert: {
           id: profile.id,
           name: profile.displayName || 'John Doe',
@@ -55,7 +55,7 @@ module.exports = (app, myDatabase) => {
       (err, doc) => {
         return cb(null, doc.value);
       }
-    })
+    )})
   );
 
 }
